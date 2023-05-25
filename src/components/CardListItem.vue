@@ -1,10 +1,22 @@
 <script>
+
 export default {
+
+    data() {
+        return {
+            linkImg: `http://purecatamphetamine.github.io/country-flag-icons/3x2/${ this.orLang.toUpperCase()}.svg`,
+        }
+    },
     props: {
         title: String,
         orTit: String,
         orLang: String,
         vote: Number,
+    },
+    methods: {
+        placeHolder () {
+            this.linkImg = '../../public/img/International_Flag_of_Planet_Earth.svg'
+        }
     }
 }
 </script>
@@ -19,6 +31,11 @@ export default {
         </span>
         <span>
             Lingua Originale: {{ orLang }}
+            <img
+                :alt="orLang"
+                :src="linkImg"
+                @error="placeHolder"
+                />
         </span>
         <span>
             Voto: {{ Math.floor(vote) }}
@@ -41,5 +58,8 @@ export default {
         &:last-child {
             border: none;
         }
+    }
+    img {
+        max-width: 100%;
     }
 </style>
