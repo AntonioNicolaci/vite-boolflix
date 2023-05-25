@@ -63,8 +63,9 @@ export default {
   </header>
 
   <main>
-    <h2>Lista Film</h2>
+    <h2>Lista Film:</h2>
     <div id="listFilm">
+      
       <CardItem
         v-for="film in FilmJSON.results"
         :title="film.title"
@@ -72,9 +73,10 @@ export default {
         :orLang="film.original_language"
         :vote="film.vote_average"
         :poster="film.poster_path"
+        :des="film.overview"
       />
     </div>
-    <h2>Lista Serie TV</h2>
+    <h2>Lista Serie TV:</h2>
     <div id="listSeries">
       <CardItem
         v-for="tv in SeriesJSON.results"
@@ -83,6 +85,7 @@ export default {
         :orLang="tv.original_language"
         :vote="tv.vote_average"
         :poster="tv.poster_path"
+        :des="tv.overview"
       />
     </div>
   </main>
@@ -119,11 +122,18 @@ header {
   }
 }
 
+h2{
+  margin-left: 32px;
+  color: #fff;
+  font-variant: small-caps;
+}
+
 #listFilm,
 #listSeries {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   margin: 2em;
+  margin-top: 0;
 }
 </style>
