@@ -4,7 +4,7 @@ export default {
 
     data() {
         return {
-            linkImg: `http://purecatamphetamine.github.io/country-flag-icons/3x2/${ this.orLang.toUpperCase()}.svg`,
+            linkPoster: `https://image.tmdb.org/t/p/w500/${this.poster}`,
         }
     },
     props: {
@@ -12,11 +12,12 @@ export default {
         orTit: String,
         orLang: String,
         vote: Number,
+        poster: String,
     },
     methods: {
-        placeHolder () {
-            this.linkImg = '../../public/img/International_Flag_of_Planet_Earth.svg'
-        }
+        posterPlaceholder () {
+            this.linkPoster = '../../public/img/poster-placeholder.svg'
+        },
     },
 
     components: {
@@ -27,6 +28,7 @@ export default {
 
 <template>
     <div>
+        <img :src="linkPoster" alt="poster" @error="posterPlaceholder">
         <span>
             Titolo: {{ title }}
         </span>

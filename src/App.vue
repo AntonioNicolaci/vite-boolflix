@@ -67,6 +67,7 @@
                 :orTit="film.original_title"
                 :orLang="film.original_language"
                 :vote="film.vote_average"
+                :poster="film.poster_path"
             />
         </div>
         <h2>Lista Serie TV</h2>
@@ -76,6 +77,7 @@
                 :orTit="tv.original_name"
                 :orLang="tv.original_language"
                 :vote="tv.vote_average"
+                :poster="tv.poster_path"
             />
         </div>
     </main>
