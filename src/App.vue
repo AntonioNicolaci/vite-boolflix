@@ -51,7 +51,8 @@
 
 <template>
     <header>
-        <h1>Boolflix</h1>
+        <!-- <h1>Boolflix</h1> -->
+        <img src="https://image.tmdb.org/t/p/w200/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="logo">
         <div>
             <input type="text" v-model="research">
             <button @click="resAPI(research)">Cerca</button> 
