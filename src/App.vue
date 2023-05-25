@@ -11,47 +11,37 @@ export default {
   },
 
   methods: {
-    resAPI(res) {
-        this.FilmJSON = [];
-        this.SeriesJSON = [];
-      const optionsFilm = {
-        method: "GET",
-        url: "https://api.themoviedb.org/3/search/movie",
-        params: {
-          query: res,
-          include_adult: "false",
-          language: "it-IT",
-          page: "1",
-        },
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWU2NjFkMjdiZWEzNjVkODUwOTY2NDNkMjc2NjBkOSIsInN1YiI6IjY0NmRlNDMyMzNhMzc2MDExZWM1ZWFlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yVZhwZBeOESjgEA_ZLAxN2yZU7Ky4FABBNEesoLZNQQ",
-        },
-      };
-      axios.request(optionsFilm).then((response) => {
-        this.FilmJSON = response.data;
-      });
-      const optionsSeries = {
-        method: "GET",
-        url: "https://api.themoviedb.org/3/search/tv",
-        params: {
-          query: res,
-          include_adult: "false",
-          language: "it-IT",
-          page: "1",
-        },
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWU2NjFkMjdiZWEzNjVkODUwOTY2NDNkMjc2NjBkOSIsInN1YiI6IjY0NmRlNDMyMzNhMzc2MDExZWM1ZWFlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yVZhwZBeOESjgEA_ZLAxN2yZU7Ky4FABBNEesoLZNQQ",
-        },
-      };
-      axios.request(optionsSeries).then((response) => {
-        this.SeriesJSON = response.data;
-      });
-    },
-  },
+        resAPI(res, arrType, arrOBJ) {
+            arrType.forEach((element, index) => {
+                arrOBJ = [];
+                const options = {
+                    method: "GET",
+                    url: `https://api.themoviedb.org/3/search/${element}`,
+                    params: {
+                        query: res,
+                        include_adult: "false",
+                        language: "it-IT",
+                        page: "1",
+                    },
+                    headers: {
+                        accept: "application/json",
+                        Authorization:
+                            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWU2NjFkMjdiZWEzNjVkODUwOTY2NDNkMjc2NjBkOSIsInN1YiI6IjY0NmRlNDMyMzNhMzc2MDExZWM1ZWFlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yVZhwZBeOESjgEA_ZLAxN2yZU7Ky4FABBNEesoLZNQQ",
+                    },
+                }
+                if  (arrType[index] === 'movie'){
+                    axios.request(options).then((response) => {
+                        return this.FilmJSON = response.data;
+                    }) 
+                }
+                else {
+                    axios.request(options).then((response) => {
+                        return this.SeriesJSON = response.data;
+                    })
+                }
+            })
+        }
+},
 
   components: {
     CardItem,
@@ -68,7 +58,7 @@ export default {
     />
     <div>
       <input type="text" v-model="research" />
-      <button @click="resAPI(research)">Cerca</button>
+      <button @click="resAPI(research, ['movie', 'tv'])">Cerca</button>
     </div>
   </header>
 
