@@ -1,5 +1,5 @@
 <script>
-
+import LangFlag from 'vue-lang-code-flags';
 export default {
 
     data() {
@@ -17,7 +17,11 @@ export default {
         placeHolder () {
             this.linkImg = '../../public/img/International_Flag_of_Planet_Earth.svg'
         }
-    }
+    },
+
+    components: {
+        LangFlag,
+    },
 }
 </script>
 
@@ -31,11 +35,7 @@ export default {
         </span>
         <span>
             Lingua Originale: {{ orLang }}
-            <img
-                :alt="orLang"
-                :src="linkImg"
-                @error="placeHolder"
-                />
+            <lang-flag :iso="orLang" />
         </span>
         <span>
             Voto: {{ Math.floor(vote) }}
